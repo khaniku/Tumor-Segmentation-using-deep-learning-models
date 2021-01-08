@@ -33,20 +33,20 @@ config["training_patch_start_offset"] = (16, 16, 16)  # randomly offset the firs
 config["skip_blank"] = True  # if True, then patches without any target will be skipped
 
 # To be changed accordingly, if it is required.
-config["img_dir"] = "../../drive/MyDrive/Tumor Segmentation/data/BraTS2020_TrainingData/MICCAI_BraTS2020_TrainingData"
-config["label_dir"] = "../../drive/MyDrive/Tumor Segmentation/data/BraTS2020_TrainingData/MICCAI_BraTS2020_TrainingData"
-config["test_dir"] = "../../drive/MyDrive/Tumor Segmentation/data/BraTS2020_ValidationData/MICCAI_BraTS2020_ValidationData" # or change 'ValidationData' --> 'TestData' when you predict for test data
+config["img_dir"] = "/content/drive/MyDrive/TumorSegmentation/data/BraTS2020_TrainingData/MICCAI_BraTS2020_TrainingData"
+config["label_dir"] = "/content/drive/MyDrive/TumorSegmentation/data/BraTS2020_TrainingData/MICCAI_BraTS2020_TrainingData"
+config["test_dir"] = "/content/drive/MyDrive/TumorSegmentation/data/BraTS2020_ValidationData/MICCAI_BraTS2020_ValidationData" # or change 'ValidationData' --> 'TestData' when you predict for test data
 # config["img_dir"] = "./data/model/brats20/TrainingData"
 # config["label_dir"] = "./data/model/brats20/TrainingData"
 # config["test_dir"] = "./data/model/brats20/ValidationData" # or change 'ValidationData' --> 'TestData' when you predict for test data
 config["num_test_files"] = 125 # Currently, this is number of validation files, change it to number of test files when you predict for test files
 
-config["data_file"] = "../../Tumor-Segmentation-and-Detection-using-deep-learning-models/U-net/src/unet3d/data/model/brats20_data.h5"
-config["data_file_test"] = "../../Tumor-Segmentation-and-Detection-using-deep-learning-models/U-net/src/unet3d/data/model/brats20_data_test.h5"
-config["model_file"] = "../../Tumor-Segmentation-and-Detection-using-deep-learning-models/U-net/src/unet3d/data/model/isensee_2017_model.h5"
+config["data_file"] = "/content/Tumor-Segmentation-and-Detection-using-deep-learning-models/U-net/src/unet3d/data/model/brats20_data.h5"
+config["data_file_test"] = "/content/Tumor-Segmentation-and-Detection-using-deep-learning-models/U-net/src/unet3d/data/model/brats20_data_test.h5"
+config["model_file"] = "/content/Tumor-Segmentation-and-Detection-using-deep-learning-models/U-net/src/unet3d/data/model/isensee_2017_model.h5"
 
-config["training_file"] = "../../Tumor-Segmentation-and-Detection-using-deep-learning-models/U-net/src/unet3d/data/model/training_ids.pkl"
-config["validation_file"] = "../../Tumor-Segmentation-and-Detection-using-deep-learning-models/U-net/src/unet3d/data/model/validation_ids.pkl"
-config["test_file"] = "../../Tumor-Segmentation-and-Detection-using-deep-learning-models/U-net/src/unet3d/data/model/test_ids.pkl"
+config["training_file"] = "/content/Tumor-Segmentation-and-Detection-using-deep-learning-models/U-net/src/unet3d/data/model/training_ids.pkl"
+config["validation_file"] = "/content/Tumor-Segmentation-and-Detection-using-deep-learning-models/U-net/src/unet3d/data/model/validation_ids.pkl"
+config["test_file"] = "/content/Tumor-Segmentation-and-Detection-using-deep-learning-models/U-net/src/unet3d/data/model/test_ids.pkl"
 
 config["overwrite"] = False  # If True, will previous files. If False, will use previously written files.

@@ -8,6 +8,9 @@ from unet3d.training import load_old_model, train_model
 
 from config_train import config
 
+from google.colab import drive
+drive.mount('/content/drive')
+
 def fetch_training_data_files(return_subject_ids=False):
     training_data_files = list()
     subject_ids = list()
