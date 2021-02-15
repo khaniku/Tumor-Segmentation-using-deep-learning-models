@@ -1,0 +1,28 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+numpy = "*"
+nibabel = "*"
+tqdm = "*"
+"flake8" = "*"
+python-dotenv = "*"
+matplotlib = "*"
+sklearn = "*"
+medpy = "*"
+bistiming = "*"
+torch = "==1.2.0"
+comet-ml = "*"
+opencv-python = "*"
+albumentations = "*"
+simpleitk = "*"
+torchvision = "*"
+pandas = "*"
+pynrrd = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.6"
