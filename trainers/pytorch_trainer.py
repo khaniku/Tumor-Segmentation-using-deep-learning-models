@@ -83,7 +83,6 @@ class PytorchTrainer(TrainerBase, ABC):
         if self.opt is not None:
             self.opt.load_state_dict(checkpoint['optimizer'])
         self.i_step = checkpoint['step'] + 1
-        print(self.i_step)
         print(f'model loaded from {file_path}')
 
     def _validate(self, validation_data_generator, metric, **kwargs):
