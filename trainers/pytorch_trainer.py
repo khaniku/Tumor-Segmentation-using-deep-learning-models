@@ -57,6 +57,8 @@ class PytorchTrainer(TrainerBase, ABC):
         if checkpoint_dir is not None:
             print("here")
             self.load(checkpoint_dir)
+        else:
+            print("no checkpoint")
 
         self.i_step = 0
 
