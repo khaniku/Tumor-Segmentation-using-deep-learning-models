@@ -64,7 +64,6 @@ def main():
         experiment.log_parameters(vars(args))
 
     if args.checkpoint_dir is not None:
-        print(args.checkpoint_dir)
         folder_name = os.path.basename(os.path.normpath(args.checkpoint_dir))
         model_id, data_provider_id, time_stamp = parse_exp_id(folder_name)
         args.model_id, args.data_provider_id = model_id, data_provider_id
@@ -106,14 +105,27 @@ def main():
         epoch_milestones=args.epoch_milestones,
         gamma=args.gamma,
     )
-    trainer = PytorchTrainer(
-        model=model,
-        dataset_size=len(data_provider),
-        comet_experiment=experiment,
-        profile=args.profile,
-        optimizer=optimizer,
-        scheduler=scheduler,
-    )
+
+    if args.checkpoint_dir is not None:
+        trainer = PytorchTrainer(
+            model=model,
+            dataset_size=len(data_provider),
+            comet_experiment=experiment,
+            profile=args.profile,
+            optimizer=optimizer,
+            checkpoint_dir=args.checkpoint_dir,
+            scheduler=scheduler,
+        )
+    else:
+        trainer = PytorchTrainer(
+            model=model,
+            dataset_size=len(data_provider),
+            comet_experiment=experiment,
+            profile=args.profile,
+            optimizer=optimizer,
+            scheduler=scheduler,
+        )
+
     flow(
         data_provider=data_provider,
         auxiliary_data_providers=auxiliary_data_providers,
