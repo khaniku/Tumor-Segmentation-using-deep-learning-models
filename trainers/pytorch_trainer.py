@@ -55,6 +55,7 @@ class PytorchTrainer(TrainerBase, ABC):
             self.model.cuda()
         print(f'Total parameters: {self.count_parameters()}')
         if checkpoint_dir is not None:
+            print("here")
             self.load(checkpoint_dir)
 
         self.i_step = 0
