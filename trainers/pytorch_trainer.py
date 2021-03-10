@@ -112,6 +112,7 @@ class PytorchTrainer(TrainerBase, ABC):
             self.profile.enable()
 
         for self.i_step in range(self.i_step, self.i_step + step_num):
+            print(self.i_step)
             log_dict, aux_log_dicts = self.model.fit_generator(
                 training_data_generator,
                 auxiliary_data_generators,
@@ -124,9 +125,9 @@ class PytorchTrainer(TrainerBase, ABC):
             if self.i_step % verbose_step_num == 0:
                 print(f'epoch: {self.i_step / self.dataset_size:.2f}', log_dict)
                 self.save()
-                # metrics = self._validate(
-                #     validation_data_generator, metric, batch_size=batch_size
-                # )
+                metrics = self._validate(
+                    validation_data_generator, metric, batch_size=batch_size
+                )
                 if self.comet_experiment is not None:
                     self.comet_experiment.log_metrics(
                         log_dict, prefix='training', step=self.i_step
