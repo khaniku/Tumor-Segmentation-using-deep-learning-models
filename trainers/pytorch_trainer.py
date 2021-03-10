@@ -112,10 +112,8 @@ class PytorchTrainer(TrainerBase, ABC):
             self.profile.enable()
 
         for self.i_step in range(self.i_step, self.i_step + step_num):
-            print(self.i_step)
-            print(verbose_step_num)
-            print(epoch_num)
-            print(self.i_step % verbose_step_num)
+            print(self.i_step / self.dataset_size)
+
             log_dict, aux_log_dicts = self.model.fit_generator(
                 training_data_generator,
                 auxiliary_data_generators,
