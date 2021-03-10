@@ -57,10 +57,7 @@ class PytorchTrainer(TrainerBase, ABC):
             self.model.cuda()
         print(f'Total parameters: {self.count_parameters()}')
         if checkpoint_dir is not None:
-            print(checkpoint_dir)
             self.load(checkpoint_dir)
-        else:
-            print("no checkpoint")
 
         self.i_step = 0
 
@@ -84,6 +81,7 @@ class PytorchTrainer(TrainerBase, ABC):
         if self.opt is not None:
             self.opt.load_state_dict(checkpoint['optimizer'])
         self.i_step = checkpoint['step'] + 1
+        print(self.i_step)
         print(f'model loaded from {file_path}')
 
     def _validate(self, validation_data_generator, metric, **kwargs):
