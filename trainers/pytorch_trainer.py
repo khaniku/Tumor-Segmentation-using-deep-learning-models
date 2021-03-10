@@ -11,7 +11,6 @@ from dotenv import load_dotenv
 import numpy as np
 from tqdm import tqdm
 import pandas as pd
-from parser import brain_tumor_argparse
 
 
 from .base import TrainerBase
@@ -20,8 +19,7 @@ from preprocess_tools.image_utils import save_array_to_nii
 
 load_dotenv('./.env')
 RESULT_DIR_BASE = os.environ.get('RESULT_DIR')
-parser = brain_tumor_argparse()
-args = parser.parse_args()
+
 
 class PytorchTrainer(TrainerBase, ABC):
 
@@ -56,11 +54,9 @@ class PytorchTrainer(TrainerBase, ABC):
         if torch.cuda.is_available():
             self.model.cuda()
         print(f'Total parameters: {self.count_parameters()}')
-        if args.checkpoint_dir is not None:
+        if checkpoint_dir is not None:
             print("here")
             self.load(checkpoint_dir)
-        else:
-            print("no checkpoint")
 
         self.i_step = 0
 
@@ -79,7 +75,6 @@ class PytorchTrainer(TrainerBase, ABC):
         print(f'model saved to {self.result_path}')
 
     def load(self, file_path):
-        print(file_path)
         checkpoint = torch.load(os.path.join(file_path, 'checkpoint.pth.tar'))
         self.model.load_state_dict(checkpoint['state_dict'])
         if self.opt is not None:
@@ -125,9 +120,9 @@ class PytorchTrainer(TrainerBase, ABC):
             if self.i_step % verbose_step_num == 0:
                 print(f'epoch: {self.i_step / self.dataset_size:.2f}', log_dict)
                 self.save()
-                metrics = self._validate(
-                    validation_data_generator, metric, batch_size=batch_size
-                )
+                # metrics = self._validate(
+                #     validation_data_generator, metric, batch_size=batch_size
+                # )
                 if self.comet_experiment is not None:
                     self.comet_experiment.log_metrics(
                         log_dict, prefix='training', step=self.i_step
