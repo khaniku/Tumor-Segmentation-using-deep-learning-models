@@ -113,7 +113,7 @@ class PytorchTrainer(TrainerBase, ABC):
 
         for self.i_step in range(self.i_step, self.i_step + step_num):
             print(self.i_step)
-            print(self.verbose_step_num)
+            print(verbose_step_num)
             print(epoch_num)
             print(self.i_step % verbose_step_num)
             log_dict, aux_log_dicts = self.model.fit_generator(
