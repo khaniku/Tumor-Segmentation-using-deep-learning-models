@@ -64,6 +64,7 @@ def main():
         experiment.log_parameters(vars(args))
 
     if args.checkpoint_dir is not None:
+        print(args.checkpoint_dir)
         folder_name = os.path.basename(os.path.normpath(args.checkpoint_dir))
         model_id, data_provider_id, time_stamp = parse_exp_id(folder_name)
         args.model_id, args.data_provider_id = model_id, data_provider_id
