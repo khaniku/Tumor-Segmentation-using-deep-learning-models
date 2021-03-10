@@ -56,10 +56,12 @@ class PytorchTrainer(TrainerBase, ABC):
         if torch.cuda.is_available():
             self.model.cuda()
         print(f'Total parameters: {self.count_parameters()}')
+
+        self.i_step = 0
+
         if checkpoint_dir is not None:
             self.load(checkpoint_dir)
 
-        self.i_step = 0
 
     def count_parameters(self):
         return sum(p.numel() for p in self.model.parameters() if p.requires_grad)
