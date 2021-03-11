@@ -38,9 +38,9 @@ class Brats2020DataProvider(DataProviderBase):
 
         # self.train_ids = self.all_ids
         # self.test_ids = self._get_test_all_ids()
+
         self.train_ids = self.all_ids[: -len(self.all_ids) // 10]
         self.test_ids = self.all_ids[-len(self.all_ids) // 10:]
-
         print(f'training on {len(self.train_ids)} samples, '
               f'validating on {len(self.test_ids)} samples')
 

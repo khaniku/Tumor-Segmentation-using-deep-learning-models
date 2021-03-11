@@ -86,8 +86,8 @@ class ClasswiseMetric(MetricBase):
 
         self.metrics = {
             'soft_dice': (soft_dice, self.prob_pred),
-            'hard_dice': (medmetric.dc, self.pred),
-            'sensitivity': (medmetric.sensitivity, self.pred),
+            # 'hard_dice': (medmetric.dc, self.pred),
+            # 'sensitivity': (medmetric.sensitivity, self.pred),
             'precision': (medmetric.precision, self.pred),
         }
 
@@ -142,14 +142,14 @@ class BRATSMetric(MetricBase):
 
         self.metrics = {
             'soft_dice': soft_dice,
-            'hard_dice': medmetric.dc,
-            'sensitivity': medmetric.sensitivity,
+            # 'hard_dice': medmetric.dc,
+            # 'sensitivity': medmetric.sensitivity,
             'precision': medmetric.precision,
         }
         self.modes = {
             'complete': (self.pred_complete, self.tar_complete),
-            'core': (self.pred_core, self.tar_core),
-            'enhancing': (self.pred_enhancing, self.tar_enhancing),
+            # 'core': (self.pred_core, self.tar_core),
+            # 'enhancing': (self.pred_enhancing, self.tar_enhancing),
         }
         self.do_all_metrics = {
             f'{metric_name}_{mode}': partial(
