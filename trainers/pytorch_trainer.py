@@ -117,7 +117,7 @@ class PytorchTrainer(TrainerBase, ABC):
             print('Profiling...')
             self.profile.enable()
 
-        i = 0;
+        i = 0
         for self.i_step in range(self.i_step, self.i_step + step_num):
             log_dict, aux_log_dicts = self.model.fit_generator(
                 training_data_generator,
@@ -130,15 +130,19 @@ class PytorchTrainer(TrainerBase, ABC):
 
             if self.i_step % verbose_step_num == 0:
                 print(f'epoch: {self.i_step / self.dataset_size:.2f}', log_dict)
-
+                print(log_dict['crossentropy_loss'])
+                print(log_dict['soft_dice'])
                 epoch = self.i_step // self.dataset_size
+                training_log.append([epoch, log_dict])
+                pd.DataFrame(training_log, columns=training_log_header).set_index("epoch").to_csv(training_log_filename)
 
                 #update training log
-                if i == 4:
-                    training_log.append([epoch, log_dict])
-                    pd.DataFrame(training_log, columns=training_log_header).set_index("epoch").to_csv(training_log_filename)
-                else:
-                    i += 1
+                # if i == 4:
+                #     training_log.append([epoch, log_dict])
+                #     pd.DataFrame(training_log, columns=training_log_header).set_index("epoch").to_csv(training_log_filename)
+                #     i = 0
+                # else:
+                #     i += 1
 
                 #save model
                 self.save()
