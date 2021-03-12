@@ -136,7 +136,7 @@ class PytorchTrainer(TrainerBase, ABC):
 
                 #update training log
                 if i == 4:
-                    training_log.append([epoch, loss, dice_loss])
+                    training_log.append([epoch, loss / (i+1), dice_loss / (i+1)])
                     pd.DataFrame(training_log, columns=training_log_header).set_index("epoch").to_csv(training_log_filename)
                     i = 0
                     loss = 0
