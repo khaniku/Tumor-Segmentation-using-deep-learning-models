@@ -105,11 +105,19 @@ class PytorchTrainer(TrainerBase, ABC):
     ):
         step_num = epoch_num * self.dataset_size
         verbose_step_num = ceil(verbose_epoch_num * self.dataset_size)
+        training_log = list()
+        training_log_filename = os.path.join(self.result_path, 'training_log.csv')
+
+        if os.path.exists(training_log_filename):
+            training_log.extend(pd.read_csv(training_log_filename).values)
+
+        training_log_header = ["epoch", "loss", "lr", "val_loss"]
 
         if self.profile is not None:
             print('Profiling...')
             self.profile.enable()
 
+        i = 0;
         for self.i_step in range(self.i_step, self.i_step + step_num):
             log_dict, aux_log_dicts = self.model.fit_generator(
                 training_data_generator,
@@ -122,6 +130,17 @@ class PytorchTrainer(TrainerBase, ABC):
 
             if self.i_step % verbose_step_num == 0:
                 print(f'epoch: {self.i_step / self.dataset_size:.2f}', log_dict)
+
+                epoch = self.i_step // self.dataset_size
+
+                #update training log
+                if i == 4:
+                    training_log.append([epoch, log_dict])
+                    pd.DataFrame(training_log, columns=training_log_header).set_index("epoch").to_csv(training_log_filename)
+                else:
+                    i += 1
+
+                #save model
                 self.save()
 
                 # metrics = self._validate(
