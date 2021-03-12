@@ -111,7 +111,7 @@ class PytorchTrainer(TrainerBase, ABC):
         if os.path.exists(training_log_filename):
             training_log.extend(pd.read_csv(training_log_filename).values)
 
-        training_log_header = ["epoch", "loss", "lr", "val_loss"]
+        training_log_header = ["epoch", "loss", "soft_dice"]
 
         if self.profile is not None:
             print('Profiling...')
@@ -130,10 +130,8 @@ class PytorchTrainer(TrainerBase, ABC):
 
             if self.i_step % verbose_step_num == 0:
                 print(f'epoch: {self.i_step / self.dataset_size:.2f}', log_dict)
-                print(log_dict['crossentropy_loss'])
-                print(log_dict['soft_dice'])
                 epoch = self.i_step // self.dataset_size
-                training_log.append([epoch, log_dict])
+                training_log.append([epoch, log_dict['crossentropy_loss'], log_dict['soft_dice']])
                 pd.DataFrame(training_log, columns=training_log_header).set_index("epoch").to_csv(training_log_filename)
 
                 #update training log
