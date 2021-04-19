@@ -1,3 +1,6 @@
+"""
+test-time augmentation **NOT TESTED
+"""
 from itertools import combinations, product
 
 import torch
