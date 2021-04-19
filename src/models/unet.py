@@ -139,7 +139,7 @@ class EquiUnet(Unet):
         self._init_weights()
 
 
-class Att_EquiUnet(Unet):
+class scAG(Unet):
     def __init__(self, inplanes, num_classes, width, norm_layer=None,  dropout=0,
                  **kwargs):
         super(Unet, self).__init__()
