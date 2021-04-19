@@ -1,12 +1,12 @@
 # Installation
 
-in your favorite virtual environment:
+in your virtual environment:
 
 ```bash
 git clone https://github.com/lessw2020/Ranger-Deep-Learning-Optimizer
 cd Ranger-Deep-Learning-Optimizer
 pip install -e . 
-cd open_brats2020
+cd Tumor-Segmentation-using-deep-learning-models
 pip install -r requirements.txt
 ```
 
